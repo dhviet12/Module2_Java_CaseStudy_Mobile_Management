@@ -1,18 +1,16 @@
-package Model;
+package model;
 
 public class Mobile {
-    //properties
+
     private String name;
-    private String brand;
     private String serialNumber;
     private String color;
     private String capacity;
     private double price;
     private int quantity;
 
-    public Mobile(String name, String brand, String serialNumber, String color, String capacity, double price, int quantity) {
+    public Mobile(String name, String serialNumber, String color, String capacity, double price, int quantity) {
         this.name = name;
-        this.brand = brand;
         this.serialNumber = serialNumber;
         this.color = color;
         this.capacity = capacity;
@@ -44,7 +42,6 @@ public class Mobile {
     public String toString() {
         return "Mobile{" +
                 "name='" + name + '\'' +
-                ", brand='" + brand + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", color='" + color + '\'' +
                 ", capacity='" + capacity + '\'' +
