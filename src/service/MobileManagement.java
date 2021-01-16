@@ -49,8 +49,8 @@ public class MobileManagement {
 
     public void sortMobileListByPriceUP() {
         Collections.sort(mobileList, ((o1, o2) -> {
-            if (o1.getPrice() > o2.getPrice()) return 1;
-            else if (o1.getPrice() < o2.getPrice()) return -1;
+            if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) return 1;
+            else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return -1;
             else return 0;
         }));
         showAllList();
@@ -58,8 +58,8 @@ public class MobileManagement {
 
     public void sortMobileListByPriceDOWN() {
         Collections.sort(mobileList, ((o1, o2) -> {
-            if (o1.getPrice() > o2.getPrice()) return -1;
-            else if (o1.getPrice() < o2.getPrice()) return 1;
+            if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) return -1;
+            else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return 1;
             else return 0;
         }));
         showAllList();

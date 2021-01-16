@@ -1,3 +1,5 @@
+package view;
+
 import service.MobileManagement;
 import model.Iphone;
 import model.Samsung;

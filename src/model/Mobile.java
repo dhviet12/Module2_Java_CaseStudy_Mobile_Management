@@ -6,20 +6,20 @@ public class Mobile {
     private String serialNumber;
     private String color;
     private String capacity;
-    private double price;
+    private double suggestedPrice;
     private int quantity;
 
-    public Mobile(String name, String serialNumber, String color, String capacity, double price, int quantity) {
+    public Mobile(String name, String serialNumber, String color, String capacity, double suggestedPrice, int quantity) {
         this.name = name;
         this.serialNumber = serialNumber;
         this.color = color;
         this.capacity = capacity;
-        this.price = price;
+        this.suggestedPrice = suggestedPrice;
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getSuggestedPrice() {
+        return suggestedPrice;
     }
 
     public String getCapacity() {
@@ -45,7 +45,7 @@ public class Mobile {
                 ", serialNumber='" + serialNumber + '\'' +
                 ", color='" + color + '\'' +
                 ", capacity='" + capacity + '\'' +
-                ", price=" + price +
+                ", suggestedPrice=" + suggestedPrice +
                 ", quantity=" + quantity +
                 '}';
     }
