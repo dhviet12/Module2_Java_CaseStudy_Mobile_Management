@@ -1,6 +1,8 @@
 package model;
 
-public class Samsung extends Mobile implements Price {
+import java.io.Serializable;
+
+public class Samsung extends Mobile implements Price, Serializable {
     private String androidVersion;
 
     public Samsung(String name, String serialNumber, String color, String capacity, double suggestedPrice, int quantity, String androidVersion) {
@@ -14,15 +16,15 @@ public class Samsung extends Mobile implements Price {
             return (super.getSuggestedPrice() * super.getQuantity()) + (10000 * super.getQuantity());
         } else if (super.getColor().equalsIgnoreCase("white")) {
             return (super.getSuggestedPrice() * super.getQuantity()) + (20000 * super.getQuantity());
-        } else if(super.getColor().equalsIgnoreCase("gold")){
+        } else if (super.getColor().equalsIgnoreCase("gold")) {
             return (super.getSuggestedPrice() * super.getQuantity()) + (30000 * super.getQuantity());
-        }
-        else
+        } else
             return super.getSuggestedPrice() * super.getQuantity();
     }
 
+
     @Override
     public String toString() {
-        return super.toString() + "androidVersion='" + androidVersion + '\'' + '}';
+        return super.toString() + ", androidVersion='" + androidVersion + '\'' + '}';
     }
 }

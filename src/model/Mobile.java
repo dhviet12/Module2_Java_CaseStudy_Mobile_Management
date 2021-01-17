@@ -38,6 +38,7 @@ public class Mobile {
         return serialNumber;
     }
 
+
     @Override
     public String toString() {
         return "Mobile{" +
@@ -45,8 +46,7 @@ public class Mobile {
                 ", serialNumber='" + serialNumber + '\'' +
                 ", color='" + color + '\'' +
                 ", capacity='" + capacity + '\'' +
-                ", suggestedPrice=" + suggestedPrice +
-                ", quantity=" + quantity +
-                '}';
+                ", suggestedPrice=" + suggestedPrice + '\''+
+                ", quantity=" + quantity +'\'';
     }
 }

@@ -1,12 +1,15 @@
 package model;
 
-public class Iphone extends Mobile implements Price {
+import java.io.Serializable;
+
+public class Iphone extends Mobile implements Price, Serializable {
     private String iosVersion;
 
     public Iphone(String name, String serialNumber, String color, String capacity, double suggestedPrice, int quantity, String iosVersion) {
         super(name, serialNumber, color, capacity, suggestedPrice, quantity);
         this.iosVersion = iosVersion;
     }
+
 
     @Override
     public double countBill() {
@@ -18,8 +21,9 @@ public class Iphone extends Mobile implements Price {
         return super.getSuggestedPrice() * super.getQuantity();
     }
 
+
     @Override
     public String toString() {
-        return super.toString() + "iosVersion='" + iosVersion + '\'' + '}';
+        return super.toString() + ", iosVersion='" + iosVersion + '\'' + '}';
     }
 }

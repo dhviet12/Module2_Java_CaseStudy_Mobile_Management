@@ -31,7 +31,7 @@ public class Main {
                     System.out.println("Enter serial number of mobile product");
                     serialNumber = scanner.nextLine();
                     mobileManagement.removeMobileBySerialNumber(serialNumber);
-                    System.err.println("Successfully removed");
+                    break;
                 case 4:
                     mobileManagement.showAllList();
                     break;
@@ -46,6 +46,12 @@ public class Main {
                     serialNumber = scanner.nextLine();
                     mobileManagement.purchaseMobileAndCreateBill(serialNumber);
                     break;
+                case 8:
+                    mobileManagement.writeFile();
+                    break;
+                case 9:
+                    mobileManagement.readFile();
+                    break;
                 case 0:
                     System.exit(0);
             }
@@ -56,13 +62,13 @@ public class Main {
     private static void addMobileProductToList(Scanner scanner, MobileManagement mobileManagement) {
         System.out.println("Enter name of mobile");
         String name = scanner.nextLine();
-        System.out.println("Enter serial of mobile product");
+        System.out.println("Enter serial number of mobile product");
         String serial = scanner.nextLine();
         System.out.println("Enter color of mobile product");
         String color = scanner.nextLine();
         System.out.println("Enter capacity of mobile product");
         String capacity = scanner.nextLine();
-        System.out.println("Enter price of mobile product");
+        System.out.println("Enter suggested price of mobile product");
         double price = Double.parseDouble(scanner.nextLine());
         System.out.println("Enter quantity of mobile product");
         int quantity = Integer.parseInt(scanner.nextLine());
@@ -99,6 +105,8 @@ public class Main {
         System.out.println("5.Display mobile list by ordered price up");
         System.out.println("6.Display mobile list by ordered price down");
         System.out.println("7.Buy mobile");
+        System.out.println("8.Write file");
+        System.out.println("9.Read file");
         System.out.println("0.Exit");
         System.out.println("----------------------------");
         System.out.println("Enter your choice:");

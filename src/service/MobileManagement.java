@@ -3,12 +3,13 @@ package service;
 import model.Iphone;
 import model.Mobile;
 import model.Samsung;
+import storage.WriteAndReadFile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MobileManagement {
+    private static final String FILE_PATH = "manager.dat";
     private List<Mobile> mobileList = new ArrayList<>();
 
     public void addMobile(Mobile mobile) {
@@ -40,15 +41,17 @@ public class MobileManagement {
             if (mobileList.get(i).getSerialNumber().equalsIgnoreCase(serialNumber)) {
                 notFound = false;
                 mobileList.remove(i);
+                System.out.println("Successfully removed");
             }
         }
         if (notFound) {
             System.err.println("Not found mobile in list");
         }
+        WriteAndReadFile.writeObjectToFile(mobileList, FILE_PATH);
     }
 
     public void sortMobileListByPriceUP() {
-        Collections.sort(mobileList, ((o1, o2) -> {
+        mobileList.sort(((o1, o2) -> {
             if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) return 1;
             else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return -1;
             else return 0;
@@ -57,7 +60,7 @@ public class MobileManagement {
     }
 
     public void sortMobileListByPriceDOWN() {
-        Collections.sort(mobileList, ((o1, o2) -> {
+        mobileList.sort(((o1, o2) -> {
             if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) return -1;
             else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return 1;
             else return 0;
@@ -65,7 +68,7 @@ public class MobileManagement {
         showAllList();
     }
 
-    public void purchaseMobileAndCreateBill(String serialNumber){
+    public void purchaseMobileAndCreateBill(String serialNumber) {
         boolean notFound = true;
         for (Mobile mobile : mobileList) {
             if (mobile.getSerialNumber().equalsIgnoreCase(serialNumber)) {
@@ -78,14 +81,18 @@ public class MobileManagement {
                 } else if (mobile instanceof Samsung) {
                     Samsung objSS = (Samsung) mobile;
                     double totalBillSamsung = objSS.countBill();
-                    System.out.println("Total bill is "+totalBillSamsung);
+                    System.out.println("Total bill is " + totalBillSamsung);
                 }
             }
         }
-        if(notFound){
+        if (notFound) {
             System.err.println("Not found this product in list");
         }
-
     }
-
+    public void writeFile(){
+        WriteAndReadFile.writeObjectToFile(mobileList,FILE_PATH);
+    }
+    public void readFile(){
+        mobileList = (List<Mobile>) WriteAndReadFile.readFromFile(FILE_PATH);
+    }
 }
