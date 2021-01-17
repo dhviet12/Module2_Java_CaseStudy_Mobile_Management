@@ -66,18 +66,28 @@ public class Main {
         String serial;
         do {
             System.out.println("Enter serial number of mobile product");
-            System.out.println("Start with I/S and 5 randomly number from 0 to 9(I00000/S11111)");
+            System.out.println("Start with IP/SS and 3 or 4 randomly number from 0 to 9(IP111/SS2222)");
             serial = scanner.nextLine();
         } while (!serial.matches(REGEX_SERIAL_NUMBER));
         System.out.println("Enter color of mobile product");
         String color = scanner.nextLine();
         String capacity;
         do {
-            System.out.println("Enter capacity of mobile product");
+            System.out.println("Enter capacity of mobile product (gb)");
             capacity = scanner.nextLine();
         } while (!capacity.matches(REGEX_CAPACITY));
-        System.out.println("Enter suggested price of mobile product");
-        double price = Double.parseDouble(scanner.nextLine());
+        boolean invalidSuggestedPrice = true;
+        double price;
+        do{
+            System.out.println("Enter suggested price of mobile product");
+            price = Double.parseDouble(scanner.nextLine());
+            if(price > 0){
+                invalidSuggestedPrice = false;
+            }
+            if(invalidSuggestedPrice){
+                System.err.println("Price must be greater than 0");
+            }
+        }while (invalidSuggestedPrice);
         boolean invalidQuantity = true;
         int quantity;
         do {
@@ -87,9 +97,9 @@ public class Main {
                 invalidQuantity = false;
             }
         } while (invalidQuantity);
-        System.out.println("Enter model of mobile Iphone/Samsung");
         boolean invalidKind = true;
         do {
+            System.out.println("Enter model of mobile Iphone/Samsung");
             String kind = scanner.nextLine();
             if (kind.equalsIgnoreCase("Iphone")) {
                 invalidKind = false;
@@ -128,6 +138,6 @@ public class Main {
         System.out.println("Enter your choice:");
     }
 
-    private static final String REGEX_SERIAL_NUMBER = "^[I|S][0-9]{5}$";
-    private static final String REGEX_CAPACITY = "^[0-9]{3}$";
+    private static final String REGEX_SERIAL_NUMBER = "^(IP|SS)[0-9]{3,4}$";
+    private static final String REGEX_CAPACITY = "^[0-9]{3,4}gb$";
 }

@@ -77,11 +77,11 @@ public class MobileManagement {
                 if (mobile instanceof Iphone) {
                     Iphone objIP = (Iphone) mobile;
                     double totalBillIphone = objIP.countBill();
-                    System.out.println(totalBillIphone);
+                    System.err.println("Total bill for this product is " + totalBillIphone);
                 } else if (mobile instanceof Samsung) {
                     Samsung objSS = (Samsung) mobile;
                     double totalBillSamsung = objSS.countBill();
-                    System.out.println("Total bill is " + totalBillSamsung);
+                    System.err.println("Total bill for this product is " + totalBillSamsung);
                 }
             }
         }
@@ -89,10 +89,12 @@ public class MobileManagement {
             System.err.println("Not found this product in list");
         }
     }
-    public void writeFile(){
-        WriteAndReadFile.writeObjectToFile(mobileList,FILE_PATH);
+
+    public void writeFile() {
+        WriteAndReadFile.writeObjectToFile(mobileList, FILE_PATH);
     }
-    public void readFile(){
+
+    public void readFile() {
         mobileList = (List<Mobile>) WriteAndReadFile.readFromFile(FILE_PATH);
     }
 }
