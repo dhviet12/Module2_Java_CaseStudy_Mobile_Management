@@ -1,5 +1,6 @@
 package view;
 
+import model.Vertu;
 import service.MobileManagement;
 import model.Iphone;
 import model.Samsung;
@@ -66,11 +67,14 @@ public class Main {
         String serial;
         do {
             System.out.println("Enter serial number of mobile product");
-            System.out.println("Start with IP/SS and 3 or 4 randomly number from 0 to 9(IP111/SS2222)");
+            System.out.println("Start with IP/SS/VT and 3 or 4 randomly number from 0 to 9");
             serial = scanner.nextLine();
         } while (!serial.matches(REGEX_SERIAL_NUMBER));
-        System.out.println("Enter color of mobile product");
-        String color = scanner.nextLine();
+        String color;
+        do {
+            System.out.println("Enter color of mobile product");
+            color = scanner.nextLine();
+        } while (!color.matches(REGEX_COLOR));
         String capacity;
         do {
             System.out.println("Enter capacity of mobile product (gb)");
@@ -78,16 +82,16 @@ public class Main {
         } while (!capacity.matches(REGEX_CAPACITY));
         boolean invalidSuggestedPrice = true;
         double price;
-        do{
+        do {
             System.out.println("Enter suggested price of mobile product");
             price = Double.parseDouble(scanner.nextLine());
-            if(price > 0){
+            if (price > 0) {
                 invalidSuggestedPrice = false;
             }
-            if(invalidSuggestedPrice){
+            if (invalidSuggestedPrice) {
                 System.err.println("Price must be greater than 0");
             }
-        }while (invalidSuggestedPrice);
+        } while (invalidSuggestedPrice);
         boolean invalidQuantity = true;
         int quantity;
         do {
@@ -96,10 +100,13 @@ public class Main {
             if (quantity > 0) {
                 invalidQuantity = false;
             }
+            if (invalidQuantity) {
+                System.err.println("Capacity must be greater than 0");
+            }
         } while (invalidQuantity);
         boolean invalidKind = true;
         do {
-            System.out.println("Enter model of mobile Iphone/Samsung");
+            System.out.println("Enter model of mobile Iphone/Samsung/Vertu");
             String kind = scanner.nextLine();
             if (kind.equalsIgnoreCase("Iphone")) {
                 invalidKind = false;
@@ -114,6 +121,13 @@ public class Main {
                 String versionAndroid = scanner.nextLine();
                 Samsung samsung = new Samsung(name, serial, color, capacity, price, quantity, versionAndroid);
                 mobileManagement.addMobile(samsung);
+                System.err.println("Successfully added to list");
+            } else if (kind.equalsIgnoreCase("Vertu")) {
+                invalidKind = false;
+                System.out.println("Enter material of Vertu");
+                String material = scanner.nextLine();
+                Vertu vertu = new Vertu(name, serial, color, capacity, price, quantity, material);
+                mobileManagement.addMobile(vertu);
                 System.err.println("Successfully added to list");
             }
             if (invalidKind) {
@@ -138,6 +152,7 @@ public class Main {
         System.out.println("Enter your choice:");
     }
 
-    private static final String REGEX_SERIAL_NUMBER = "^(IP|SS)[0-9]{3,4}$";
-    private static final String REGEX_CAPACITY = "^[0-9]{3,4}gb$";
+    private static final String REGEX_SERIAL_NUMBER = "^(IP|SS|VT)[\\d]{3,4}$";
+    private static final String REGEX_COLOR = "^[A-Za-z]$";
+    private static final String REGEX_CAPACITY = "^[\\d]{2,4}gb$";
 }

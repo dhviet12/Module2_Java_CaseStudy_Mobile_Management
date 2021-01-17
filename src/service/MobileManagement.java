@@ -3,10 +3,12 @@ package service;
 import model.Iphone;
 import model.Mobile;
 import model.Samsung;
+import model.Vertu;
 import storage.WriteAndReadFile;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MobileManagement {
     private static final String FILE_PATH = "manager.dat";
@@ -77,11 +79,15 @@ public class MobileManagement {
                 if (mobile instanceof Iphone) {
                     Iphone objIP = (Iphone) mobile;
                     double totalBillIphone = objIP.countBill();
-                    System.err.println("Total bill for this product is " + totalBillIphone);
+                    System.out.println("Total bill for this product is " + totalBillIphone);
                 } else if (mobile instanceof Samsung) {
                     Samsung objSS = (Samsung) mobile;
                     double totalBillSamsung = objSS.countBill();
-                    System.err.println("Total bill for this product is " + totalBillSamsung);
+                    System.out.println("Total bill for this product is " + totalBillSamsung);
+                } else if(mobile instanceof Vertu){
+                    Vertu objVertu = (Vertu) mobile;
+                    double totalBillVertu = objVertu.countBill();
+                    System.out.println("Total bill for this product is " + totalBillVertu);
                 }
             }
         }
