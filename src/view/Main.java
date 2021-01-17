@@ -3,6 +3,7 @@ package view;
 import service.MobileManagement;
 import model.Iphone;
 import model.Samsung;
+
 import java.util.Scanner;
 
 
@@ -67,15 +68,25 @@ public class Main {
             System.out.println("Enter serial number of mobile product");
             System.out.println("Start with I/S and 5 randomly number from 0 to 9(I00000/S11111)");
             serial = scanner.nextLine();
-        }while (!serial.matches(REGEX_SERIAL_NUMBER));
+        } while (!serial.matches(REGEX_SERIAL_NUMBER));
         System.out.println("Enter color of mobile product");
         String color = scanner.nextLine();
-        System.out.println("Enter capacity of mobile product");
-        String capacity = scanner.nextLine();
+        String capacity;
+        do {
+            System.out.println("Enter capacity of mobile product");
+            capacity = scanner.nextLine();
+        } while (!capacity.matches(REGEX_CAPACITY));
         System.out.println("Enter suggested price of mobile product");
         double price = Double.parseDouble(scanner.nextLine());
-        System.out.println("Enter quantity of mobile product");
-        int quantity = Integer.parseInt(scanner.nextLine());
+        boolean invalidQuantity = true;
+        int quantity;
+        do {
+            System.out.println("Enter quantity of mobile product");
+            quantity = Integer.parseInt(scanner.nextLine());
+            if (quantity > 0) {
+                invalidQuantity = false;
+            }
+        } while (invalidQuantity);
         System.out.println("Enter model of mobile Iphone/Samsung");
         boolean invalidKind = true;
         do {
@@ -94,7 +105,8 @@ public class Main {
                 Samsung samsung = new Samsung(name, serial, color, capacity, price, quantity, versionAndroid);
                 mobileManagement.addMobile(samsung);
                 System.err.println("Successfully added to list");
-            } if(invalidKind){
+            }
+            if (invalidKind) {
                 System.err.println("Not support this product in list");
             }
         } while (invalidKind);
@@ -115,5 +127,7 @@ public class Main {
         System.out.println("----------------------------");
         System.out.println("Enter your choice:");
     }
-    private static final String REGEX_SERIAL_NUMBER= "^[I|S][0-9]{5}$";
+
+    private static final String REGEX_SERIAL_NUMBER = "^[I|S][0-9]{5}$";
+    private static final String REGEX_CAPACITY = "^[0-9]{3}$";
 }
