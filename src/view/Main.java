@@ -1,5 +1,6 @@
 package view;
 
+import model.Mobile;
 import model.Vertu;
 import service.MobileManagement;
 import model.Iphone;
@@ -9,9 +10,10 @@ import java.util.Scanner;
 
 
 public class Main {
+    public static Scanner scanner = new Scanner(System.in);
+    public static MobileManagement mobileManagement = new MobileManagement();
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        MobileManagement mobileManagement = new MobileManagement();
         int choice;
         do {
             listMenu();
@@ -21,7 +23,9 @@ public class Main {
                     System.out.println("Enter number of mobile product you want to add");
                     int number = Integer.parseInt(scanner.nextLine());
                     for (int i = 0; i < number; i++) {
-                        addMobileProductToList(scanner, mobileManagement);
+                        Mobile mobile = getInfoMobile();
+                        mobileManagement.addMobile(mobile);
+                        System.out.println("Successfully added");
                     }
                     break;
                 case 2:
@@ -30,28 +34,34 @@ public class Main {
                     mobileManagement.findMobileBySerialNumber(serialNumber);
                     break;
                 case 3:
+                    System.out.println("Enter serial number of product");
+                    serialNumber = scanner.nextLine();
+                    Mobile editedMobile = getInfoMobile();
+                    mobileManagement.editMobileBySerialNumber(serialNumber, editedMobile);
+                    break;
+                case 4:
                     System.out.println("Enter serial number of mobile product");
                     serialNumber = scanner.nextLine();
                     mobileManagement.removeMobileBySerialNumber(serialNumber);
                     break;
-                case 4:
+                case 5:
                     mobileManagement.showAllList();
                     break;
-                case 5:
+                case 6:
                     mobileManagement.sortMobileListByPriceUP();
                     break;
-                case 6:
+                case 7:
                     mobileManagement.sortMobileListByPriceDOWN();
                     break;
-                case 7:
+                case 8:
                     System.out.println("Enter serial number of product you want to buy");
                     serialNumber = scanner.nextLine();
                     mobileManagement.purchaseMobileAndCreateBill(serialNumber);
                     break;
-                case 8:
+                case 9:
                     mobileManagement.writeFile();
                     break;
-                case 9:
+                case 10:
                     mobileManagement.readFile();
                     break;
                 case 0:
@@ -61,7 +71,7 @@ public class Main {
 
     }
 
-    private static void addMobileProductToList(Scanner scanner, MobileManagement mobileManagement) {
+    private static Mobile getInfoMobile() {
         System.out.println("Enter name of mobile");
         String name = scanner.nextLine();
         String serial;
@@ -112,47 +122,45 @@ public class Main {
                 invalidKind = false;
                 System.out.println("Enter version of IOS");
                 String versionIOS = scanner.nextLine();
-                Iphone iphone = new Iphone(name, serial, color, capacity, price, quantity, versionIOS);
-                mobileManagement.addMobile(iphone);
-                System.err.println("Successfully added to list");
+                return new Iphone(name, serial, color, capacity, price, quantity, versionIOS);
             } else if (kind.equalsIgnoreCase("Samsung")) {
                 invalidKind = false;
                 System.out.println("Enter version of Android");
                 String versionAndroid = scanner.nextLine();
-                Samsung samsung = new Samsung(name, serial, color, capacity, price, quantity, versionAndroid);
-                mobileManagement.addMobile(samsung);
-                System.err.println("Successfully added to list");
+                return new Samsung(name, serial, color, capacity, price, quantity, versionAndroid);
+
             } else if (kind.equalsIgnoreCase("Vertu")) {
                 invalidKind = false;
                 System.out.println("Enter material of Vertu");
                 String material = scanner.nextLine();
-                Vertu vertu = new Vertu(name, serial, color, capacity, price, quantity, material);
-                mobileManagement.addMobile(vertu);
-                System.err.println("Successfully added to list");
+                return new Vertu(name, serial, color, capacity, price, quantity, material);
             }
             if (invalidKind) {
                 System.err.println("Not support this product in list");
             }
         } while (invalidKind);
+        return null;
     }
 
     private static void listMenu() {
+        System.out.println("----------------------------");
         System.out.println("Menu");
         System.out.println("1.Add new mobile product to list");
         System.out.println("2.Find mobile product by Serial number");
-        System.out.println("3.Remove mobile product by Serial number");
-        System.out.println("4.Show all mobile product in list ");
-        System.out.println("5.Display mobile list by ordered price up");
-        System.out.println("6.Display mobile list by ordered price down");
-        System.out.println("7.Buy mobile");
-        System.out.println("8.Write file");
-        System.out.println("9.Read file");
+        System.out.println("3.Edit info of product");
+        System.out.println("4.Remove mobile product by Serial number");
+        System.out.println("5.Show all mobile product in list ");
+        System.out.println("6.Display mobile list by ordered price up");
+        System.out.println("7.Display mobile list by ordered price down");
+        System.out.println("8.Buy mobile");
+        System.out.println("9.Write file");
+        System.out.println("10.Read file");
         System.out.println("0.Exit");
         System.out.println("----------------------------");
         System.out.println("Enter your choice:");
     }
 
     private static final String REGEX_SERIAL_NUMBER = "^(IP|SS|VT)[\\d]{3,4}$";
-    private static final String REGEX_COLOR = "^[A-Za-z]$";
+    private static final String REGEX_COLOR = "^[A-Za-z]+[A-za-z]$";
     private static final String REGEX_CAPACITY = "^[\\d]{2,4}gb$";
 }

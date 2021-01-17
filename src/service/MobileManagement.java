@@ -36,6 +36,18 @@ public class MobileManagement {
             System.err.println("Not found mobile in list");
         }
     }
+    public void editMobileBySerialNumber(String serialNumber, Mobile mobile){
+        boolean notFound = true;
+        for (int i = 0; i < mobileList.size(); i++) {
+            if(mobileList.get(i).getSerialNumber().equalsIgnoreCase(serialNumber)){
+                notFound = false;
+                mobileList.set(i, mobile);
+            }
+        }
+        if(notFound){
+            System.err.println("Not found mobile in list");
+        }
+    }
 
     public void removeMobileBySerialNumber(String serialNumber) {
         boolean notFound = true;
