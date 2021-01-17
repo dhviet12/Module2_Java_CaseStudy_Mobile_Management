@@ -62,8 +62,12 @@ public class Main {
     private static void addMobileProductToList(Scanner scanner, MobileManagement mobileManagement) {
         System.out.println("Enter name of mobile");
         String name = scanner.nextLine();
-        System.out.println("Enter serial number of mobile product");
-        String serial = scanner.nextLine();
+        String serial;
+        do {
+            System.out.println("Enter serial number of mobile product");
+            System.out.println("Start with I/S and 5 randomly number from 0 to 9(I00000/S11111)");
+            serial = scanner.nextLine();
+        }while (!serial.matches(REGEX_SERIAL_NUMBER));
         System.out.println("Enter color of mobile product");
         String color = scanner.nextLine();
         System.out.println("Enter capacity of mobile product");
@@ -111,4 +115,5 @@ public class Main {
         System.out.println("----------------------------");
         System.out.println("Enter your choice:");
     }
+    private static final String REGEX_SERIAL_NUMBER= "^[I|S][0-9]{5}$";
 }
