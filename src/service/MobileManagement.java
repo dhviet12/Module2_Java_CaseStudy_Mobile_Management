@@ -36,15 +36,16 @@ public class MobileManagement {
             System.err.println("Not found mobile in list");
         }
     }
-    public void editMobileBySerialNumber(String serialNumber, Mobile mobile){
+
+    public void editMobileBySerialNumber(String serialNumber, Mobile mobile) {
         boolean notFound = true;
         for (int i = 0; i < mobileList.size(); i++) {
-            if(mobileList.get(i).getSerialNumber().equalsIgnoreCase(serialNumber)){
+            if (mobileList.get(i).getSerialNumber().equalsIgnoreCase(serialNumber)) {
                 notFound = false;
                 mobileList.set(i, mobile);
             }
         }
-        if(notFound){
+        if (notFound) {
             System.err.println("Not found mobile in list");
         }
     }
@@ -61,7 +62,6 @@ public class MobileManagement {
         if (notFound) {
             System.err.println("Not found mobile in list");
         }
-        WriteAndReadFile.writeObjectToFile(mobileList, FILE_PATH);
     }
 
     public void sortMobileListByPriceUP() {
@@ -96,7 +96,7 @@ public class MobileManagement {
                     Samsung objSS = (Samsung) mobile;
                     double totalBillSamsung = objSS.countBill();
                     System.out.println("Total bill for this product is " + totalBillSamsung);
-                } else if(mobile instanceof Vertu){
+                } else if (mobile instanceof Vertu) {
                     Vertu objVertu = (Vertu) mobile;
                     double totalBillVertu = objVertu.countBill();
                     System.out.println("Total bill for this product is " + totalBillVertu);
@@ -109,10 +109,11 @@ public class MobileManagement {
     }
 
     public void writeFile() {
-        WriteAndReadFile.writeObjectToFile(mobileList, FILE_PATH);
+        WriteAndReadFile.writeObjectToFile(this.mobileList, FILE_PATH);
     }
 
     public void readFile() {
-        mobileList = (List<Mobile>) WriteAndReadFile.readFromFile(FILE_PATH);
+        this.mobileList = WriteAndReadFile.readFromFile(FILE_PATH);
+        System.out.println(this.mobileList);
     }
 }

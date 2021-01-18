@@ -1,6 +1,8 @@
 package model;
 
-public class Mobile {
+import java.io.Serializable;
+
+public class Mobile implements Serializable {
 
     private String name;
     private String serialNumber;
@@ -8,6 +10,9 @@ public class Mobile {
     private String capacity;
     private double suggestedPrice;
     private int quantity;
+    public Mobile(){
+
+    }
 
     public Mobile(String name, String serialNumber, String color, String capacity, double suggestedPrice, int quantity) {
         this.name = name;

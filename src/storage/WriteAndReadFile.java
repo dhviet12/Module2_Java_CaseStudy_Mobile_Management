@@ -1,34 +1,40 @@
 package storage;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import model.Mobile;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WriteAndReadFile {
-    public static void writeObjectToFile(Object serObj, String filepath) {
+    public static void writeObjectToFile(List<Mobile> objectList, String filepath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(serObj);
+            for (int i = 0; i < objectList.size(); i++) {
+                objectOut.writeObject(objectList.get(i));
+            }
             objectOut.close();
             fileOut.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getMessage();
         }
     }
 
-    public static Object readFromFile(String filepath) {
-        Object obj = null;
+    public static List<Mobile> readFromFile(String filepath) {
+        List<Mobile> result=new ArrayList<>();
+        Mobile obj = null;
         try {
+            File file=new File(filepath);
             FileInputStream fileIn = new FileInputStream(filepath);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-            obj = objectIn.readObject();
+            while ((obj=(Mobile) objectIn.readObject())!=null){
+                result.add(obj);
+            }
             objectIn.close();
             fileIn.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
-        return obj;
+        return result;
     }
 }
