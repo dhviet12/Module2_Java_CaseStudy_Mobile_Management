@@ -21,11 +21,15 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("Enter number of mobile product you want to add");
-                    int number = Integer.parseInt(scanner.nextLine());
-                    for (int i = 0; i < number; i++) {
-                        Mobile mobile = getInfoMobile();
-                        mobileManagement.addMobile(mobile);
-                        System.out.println("Successfully added");
+                    try {
+                        int number = Integer.parseInt(scanner.nextLine());
+                        for (int i = 0; i < number; i++) {
+                            Mobile mobile = getInfoMobile();
+                            mobileManagement.addMobile(mobile);
+                            System.out.println("Successfully added");
+                        }
+                    } catch (NumberFormatException e){
+                        System.out.println("Incorrect format");
                     }
                     break;
                 case 2:
@@ -79,15 +83,21 @@ public class Main {
             System.out.println("Enter serial number of mobile product");
             System.out.println("Start with IP/SS/VT and 3 or 4 randomly number from 0 to 9");
             serial = scanner.nextLine();
+            if(!serial.matches(REGEX_SERIAL_NUMBER)){
+                System.out.println("Invalid serial number");
+            }
         } while (!serial.matches(REGEX_SERIAL_NUMBER));
         String color;
         do {
             System.out.println("Enter color of mobile product");
             color = scanner.nextLine();
+            if(!color.matches(REGEX_COLOR)){
+                System.err.println("Color is not allowed digit");
+            }
         } while (!color.matches(REGEX_COLOR));
         String capacity;
         do {
-            System.out.println("Enter capacity of mobile product (gb)");
+            System.out.println("Enter capacity of mobile product +(gb)");
             capacity = scanner.nextLine();
         } while (!capacity.matches(REGEX_CAPACITY));
         boolean invalidSuggestedPrice = true;

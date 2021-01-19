@@ -14,12 +14,12 @@ public class Iphone extends Mobile implements Price, Serializable {
 
     @Override
     public double countBill() {
-        if(super.getCapacity().equalsIgnoreCase("256gb")){
+        if (super.getCapacity().equalsIgnoreCase("256gb")) {
             return (super.getSuggestedPrice() * super.getQuantity()) + (50000 * super.getQuantity());
-        } else if(super.getCapacity().equalsIgnoreCase("512gb")){
+        } else if (super.getCapacity().equalsIgnoreCase("512gb")) {
             return (super.getSuggestedPrice() * super.getQuantity()) + (100000 * super.getQuantity());
         } else
-        return super.getSuggestedPrice() * super.getQuantity();
+            return super.getSuggestedPrice() * super.getQuantity();
     }
 
 

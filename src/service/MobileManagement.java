@@ -86,20 +86,67 @@ public class MobileManagement {
         boolean notFound = true;
         for (Mobile mobile : mobileList) {
             if (mobile.getSerialNumber().equalsIgnoreCase(serialNumber)) {
-                System.out.println(mobile);
                 notFound = false;
                 if (mobile instanceof Iphone) {
                     Iphone objIP = (Iphone) mobile;
                     double totalBillIphone = objIP.countBill();
-                    System.out.println("Total bill for this product is " + totalBillIphone);
+                    System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , "Name mobile"
+                            , "Serial number"
+                            , "Color"
+                            , "Capacity"
+                            , "Suggested Price"
+                            , "Quantity"
+                            , "Total bill");
+                    System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , objIP.getName()
+                            , objIP.getSerialNumber()
+                            , objIP.getColor()
+                            , objIP.getCapacity()
+                            , objIP.getSuggestedPrice()
+                            , objIP.getQuantity()
+                            , totalBillIphone +"\n");
+
                 } else if (mobile instanceof Samsung) {
                     Samsung objSS = (Samsung) mobile;
                     double totalBillSamsung = objSS.countBill();
-                    System.out.println("Total bill for this product is " + totalBillSamsung);
+                    System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , "Name mobile"
+                            , "Serial number"
+                            , "Color"
+                            , "Capacity"
+                            , "Suggested Price"
+                            , "Quantity"
+                            , "Total bill");
+                    System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , objSS.getName()
+                            , objSS.getSerialNumber()
+                            , objSS.getColor()
+                            , objSS.getCapacity()
+                            , objSS.getSuggestedPrice()
+                            , objSS.getQuantity()
+                            , totalBillSamsung +"\n");
+
                 } else if (mobile instanceof Vertu) {
                     Vertu objVertu = (Vertu) mobile;
                     double totalBillVertu = objVertu.countBill();
-                    System.out.println("Total bill for this product is " + totalBillVertu);
+                    System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , "Name mobile"
+                            , "Serial number"
+                            , "Color"
+                            , "Capacity"
+                            , "Suggested Price"
+                            , "Quantity"
+                            , "Total bill");
+                    System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                            , objVertu.getName()
+                            , objVertu.getSerialNumber()
+                            , objVertu.getColor()
+                            , objVertu.getCapacity()
+                            , objVertu.getSuggestedPrice()
+                            , objVertu.getQuantity()
+                            , totalBillVertu +"\n");
+
                 }
             }
         }
@@ -109,11 +156,10 @@ public class MobileManagement {
     }
 
     public void writeFile() {
-        WriteAndReadFile.writeObjectToFile(this.mobileList, FILE_PATH);
+        WriteAndReadFile.writeObjectToFile(FILE_PATH, mobileList);
     }
 
     public void readFile() {
-        this.mobileList = WriteAndReadFile.readFromFile(FILE_PATH);
-        System.out.println(this.mobileList);
+        mobileList = (List<Mobile>) WriteAndReadFile.readObjectFromFile(FILE_PATH);
     }
 }
