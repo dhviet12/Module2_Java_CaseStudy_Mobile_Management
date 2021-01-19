@@ -10,6 +10,10 @@ public class Samsung extends Mobile implements Price, Serializable {
         this.androidVersion = androidVersion;
     }
 
+    public String getAndroidVersion() {
+        return androidVersion;
+    }
+
     @Override
     public double countBill() {
         if (super.getColor().equalsIgnoreCase("black")) {

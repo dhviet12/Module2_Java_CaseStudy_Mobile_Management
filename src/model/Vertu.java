@@ -16,19 +16,19 @@ public class Vertu extends Mobile implements Price, Serializable {
 
     @Override
     public double countBill() {
-        switch (getMaterial()){
+        switch (getMaterial()) {
             case "gold":
-                return super.getSuggestedPrice()* super.getQuantity() + (200000*super.getQuantity());
+                return super.getSuggestedPrice() * super.getQuantity() + (200000 * super.getQuantity());
             case "sapphire":
-                return super.getSuggestedPrice()* super.getQuantity() + (500000*super.getQuantity());
+                return super.getSuggestedPrice() * super.getQuantity() + (500000 * super.getQuantity());
             case "diamond":
-                return super.getSuggestedPrice()* super.getQuantity() + (700000*super.getQuantity());
+                return super.getSuggestedPrice() * super.getQuantity() + (700000 * super.getQuantity());
         }
-        return super.getSuggestedPrice()* super.getQuantity();
+        return super.getSuggestedPrice() * super.getQuantity();
     }
 
     @Override
     public String toString() {
-        return super.toString() +  ", material='"+ material + '\''+ '}';
+        return super.toString() + ", material='" + material + '\'' + '}';
     }
 }

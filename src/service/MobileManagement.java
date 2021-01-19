@@ -7,6 +7,8 @@ import model.Vertu;
 import storage.WriteAndReadFile;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -15,12 +17,59 @@ public class MobileManagement {
     private List<Mobile> mobileList = new ArrayList<>();
 
     public void addMobile(Mobile mobile) {
+        this.readFile();
         mobileList.add(mobile);
+        this.writeFile();
     }
 
+
     public void showAllList() {
+        System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                , "Name mobile"
+                , "Serial number"
+                , "Color"
+                , "Capacity"
+                , "Suggested Price"
+                , "Quantity"
+                , "IOS version"
+                , "Android version"
+                , "Material skin"
+        );
         for (Mobile mobile : mobileList) {
-            System.out.println(mobile);
+            if (mobile instanceof Iphone) {
+                Iphone objIP = (Iphone) mobile;
+                System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                        , objIP.getName()
+                        , objIP.getSerialNumber()
+                        , objIP.getColor()
+                        , objIP.getCapacity()
+                        , objIP.getSuggestedPrice()
+                        , objIP.getQuantity()
+                        , objIP.getIosVersion() + "\n");
+            } else if (mobile instanceof Samsung) {
+                Samsung objSS = (Samsung) mobile;
+                System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                        , objSS.getName()
+                        , objSS.getSerialNumber()
+                        , objSS.getColor()
+                        , objSS.getCapacity()
+                        , objSS.getSuggestedPrice()
+                        , objSS.getQuantity()
+                        ,""
+                        , objSS.getAndroidVersion() + "\n");
+            } else if (mobile instanceof Vertu) {
+                Vertu objVT = (Vertu) mobile;
+                System.out.printf("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s"
+                        , objVT.getName()
+                        , objVT.getSerialNumber()
+                        , objVT.getColor()
+                        , objVT.getCapacity()
+                        , objVT.getSuggestedPrice()
+                        , objVT.getQuantity()
+                        ,""
+                        ,""
+                        , objVT.getMaterial() + "\n");
+            }
         }
     }
 
@@ -29,7 +78,7 @@ public class MobileManagement {
         for (Mobile mobile : mobileList) {
             if (mobile.getSerialNumber().equalsIgnoreCase(serialNumber)) {
                 notFound = false;
-                System.out.println(mobile);
+                showAllList();
             }
         }
         if (notFound) {
@@ -70,16 +119,19 @@ public class MobileManagement {
             else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return -1;
             else return 0;
         }));
-        showAllList();
     }
 
     public void sortMobileListByPriceDOWN() {
-        mobileList.sort(((o1, o2) -> {
-            if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) return -1;
-            else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) return 1;
-            else return 0;
-        }));
-        showAllList();
+        Collections.sort(mobileList, new Comparator<Mobile>() {
+            @Override
+            public int compare(Mobile o1, Mobile o2) {
+                if (o1.getSuggestedPrice() > o2.getSuggestedPrice()) {
+                    return -1;
+                } else if (o1.getSuggestedPrice() < o2.getSuggestedPrice()) {
+                    return 1;
+                } else return 0;
+            }
+        });
     }
 
     public void purchaseMobileAndCreateBill(String serialNumber) {
@@ -105,7 +157,7 @@ public class MobileManagement {
                             , objIP.getCapacity()
                             , objIP.getSuggestedPrice()
                             , objIP.getQuantity()
-                            , totalBillIphone +"\n");
+                            , totalBillIphone);
 
                 } else if (mobile instanceof Samsung) {
                     Samsung objSS = (Samsung) mobile;
@@ -125,7 +177,7 @@ public class MobileManagement {
                             , objSS.getCapacity()
                             , objSS.getSuggestedPrice()
                             , objSS.getQuantity()
-                            , totalBillSamsung +"\n");
+                            , totalBillSamsung);
 
                 } else if (mobile instanceof Vertu) {
                     Vertu objVertu = (Vertu) mobile;
@@ -145,8 +197,7 @@ public class MobileManagement {
                             , objVertu.getCapacity()
                             , objVertu.getSuggestedPrice()
                             , objVertu.getQuantity()
-                            , totalBillVertu +"\n");
-
+                            , totalBillVertu);
                 }
             }
         }

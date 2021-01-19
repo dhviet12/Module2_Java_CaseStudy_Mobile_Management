@@ -28,7 +28,7 @@ public class Main {
                             mobileManagement.addMobile(mobile);
                             System.out.println("Successfully added");
                         }
-                    } catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.out.println("Incorrect format");
                     }
                     break;
@@ -83,7 +83,7 @@ public class Main {
             System.out.println("Enter serial number of mobile product");
             System.out.println("Start with IP/SS/VT and 3 or 4 randomly number from 0 to 9");
             serial = scanner.nextLine();
-            if(!serial.matches(REGEX_SERIAL_NUMBER)){
+            if (!serial.matches(REGEX_SERIAL_NUMBER)) {
                 System.out.println("Invalid serial number");
             }
         } while (!serial.matches(REGEX_SERIAL_NUMBER));
@@ -91,7 +91,7 @@ public class Main {
         do {
             System.out.println("Enter color of mobile product");
             color = scanner.nextLine();
-            if(!color.matches(REGEX_COLOR)){
+            if (!color.matches(REGEX_COLOR)) {
                 System.err.println("Color is not allowed digit");
             }
         } while (!color.matches(REGEX_COLOR));
@@ -153,8 +153,7 @@ public class Main {
     }
 
     private static void listMenu() {
-        System.out.println("----------------------------");
-        System.out.println("Menu");
+        System.out.println("\n" + "Menu");
         System.out.println("1.Add new mobile product to list");
         System.out.println("2.Find mobile product by Serial number");
         System.out.println("3.Edit info of product");

@@ -50,7 +50,7 @@ public class Mobile implements Serializable {
 
     @Override
     public String toString() {
-        return  "Mobile{" +
+        return "Mobile{" +
                 "name='" + name + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", color='" + color + '\'' +
